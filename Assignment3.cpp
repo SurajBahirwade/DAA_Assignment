@@ -1,5 +1,5 @@
-/* Name - Machindra Mane
-PRN - 123B1F060 */
+/* Name - Suraj Bahirwade
+PRN - 123B1F005 */
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -7,10 +7,9 @@ using namespace std;
 struct Item {
     double utility;
     double weight;
-    double ratio;  // utility per weight
+    double ratio;  
 };
 
-// Compare to sort by ratio descending
 bool compare(Item a, Item b) {
     return a.ratio > b.ratio;
 }
@@ -26,7 +25,7 @@ double fractionalKnapsack(vector<Item>& items, double capacity) {
             totalUtility += item.utility;
             remaining -= item.weight;
         } else {
-            // Take fractional part
+            
             totalUtility += item.ratio * remaining;
             break;
         }
