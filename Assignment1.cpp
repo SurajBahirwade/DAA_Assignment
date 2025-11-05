@@ -1,4 +1,4 @@
-/* Name - Suraj Bhirwade
+/* Name - Suraj Bahirwade
 PRN - 123B1F005 */
 
 #include <bits/stdc++.h>
