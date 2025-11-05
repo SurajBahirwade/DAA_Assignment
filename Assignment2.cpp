@@ -1,5 +1,5 @@
-/* Name - Machindra Mane
-PRN - 123B1F060 */
+/* Name - Suraj Bahirwade
+PRN - 123B1F005 */
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -11,7 +11,6 @@ struct Movie {
     int popularity;
 };
 
-//returns true if a should come before b (descending order)
 bool cmpRating(const Movie &a, const Movie &b) {
     return a.rating > b.rating;
 }
@@ -24,13 +23,12 @@ bool cmpPopularity(const Movie &a, const Movie &b) {
     return a.popularity > b.popularity;
 }
 
-// Partition function for quicksort
 int partition(vector<Movie> &movies, int low, int high, bool (*cmp)(const Movie&, const Movie&)) {
-    Movie pivot = movies[high]; // pivot element
-    int i = low - 1;            // index of smaller element
+    Movie pivot = movies[high]; 
+    int i = low - 1;            
 
     for (int j = low; j < high; j++) {
-        // If movies[j] should come before pivot according to cmp, swap it forward
+       
         if (cmp(movies[j], pivot)) {
             i++;
             swap(movies[i], movies[j]);
@@ -40,7 +38,6 @@ int partition(vector<Movie> &movies, int low, int high, bool (*cmp)(const Movie&
     return i + 1;
 }
 
-// QuickSort recursive function
 void quickSort(vector<Movie> &movies, int low, int high, bool (*cmp)(const Movie&, const Movie&)) {
     if (low < high) {
         int pi = partition(movies, low, high, cmp);
@@ -50,7 +47,6 @@ void quickSort(vector<Movie> &movies, int low, int high, bool (*cmp)(const Movie
     }
 }
 
-// Print movies
 void printMovies(const vector<Movie> &movies) {
     for (const auto &m : movies) {
         cout << m.title << " | Rating: " << m.rating << " | Year: " << m.year
