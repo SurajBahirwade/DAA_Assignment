@@ -1,26 +1,23 @@
-/* Name - Machindra Mane
-PRN - 123B1F060 */
+/* Name - Suraj Bahirwade
+PRN - 123B1F005 */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 const int INF = 1e9;
 
-// Structure to represent a node in the Branch and Bound tree
 struct Node {
-    vector<int> path; // path taken so far
+    vector<int> path; 
     vector<vector<int>> reducedMatrix;
     int cost;
-    int vertex; // current city
-    int level;  // depth in tree
+    int vertex; 
+    int level;  
 };
 
-// Function to reduce matrix and return the reduction cost
 int reduceMatrix(vector<vector<int>>& mat) {
     int reduction = 0;
     int n = mat.size();
 
-    // Row reduction
     for (int i = 0; i < n; i++) {
         int rowMin = INF;
         for (int j = 0; j < n; j++)
@@ -33,7 +30,6 @@ int reduceMatrix(vector<vector<int>>& mat) {
         }
     }
 
-    // Column reduction
     for (int j = 0; j < n; j++) {
         int colMin = INF;
         for (int i = 0; i < n; i++)
@@ -49,7 +45,6 @@ int reduceMatrix(vector<vector<int>>& mat) {
     return reduction;
 }
 
-// Create a new node
 Node* newNode(vector<vector<int>> parentMatrix, vector<int> const &path, int level, int i, int j) {
     int n = parentMatrix.size();
     Node* node = new Node;
@@ -57,24 +52,20 @@ Node* newNode(vector<vector<int>> parentMatrix, vector<int> const &path, int lev
     node->level = level;
     node->reducedMatrix = parentMatrix;
 
-    // Set outgoing edges for city i and incoming edges for city j as INF
     for (int k = 0; k < n; k++) {
         node->reducedMatrix[i][k] = INF;
         node->reducedMatrix[k][j] = INF;
     }
-    node->reducedMatrix[j][0] = INF; // prevent returning to start too early
+    node->reducedMatrix[j][0] = INF; 
 
     return node;
 }
 
-// Custom comparator for priority queue (lowest cost first)
 struct CompareCost {
     bool operator()(const Node* a, const Node* b) const {
         return a->cost > b->cost;
     }
 };
-
-// LC Branch and Bound algorithm for TSP
 int tspLC(vector<vector<int>> costMatrix) {
     int n = costMatrix.size();
     priority_queue<Node*, vector<Node*>, CompareCost> pq;
@@ -129,10 +120,8 @@ int tspLC(vector<vector<int>> costMatrix) {
     cout << "\nMinimum Cost: " << minCost << "\n";
     return minCost;
 }
-
-// Example usage
 int main() {
-    // Example cost matrix (0 means same city)
+    
     vector<vector<int>> costMatrix = {
         {INF, 10, 15, 20},
         {10, INF, 35, 25},
